@@ -1,5 +1,6 @@
 // click event listener for "view all tabs" button on popup
 document.getElementById("view").addEventListener("click", displayTabs);
+document.getElementById("voice").addEventListener("click", voiceAssistant);
 
 // display all tabs
 function displayTabs() {
@@ -12,4 +13,8 @@ function displayTabs() {
         });
         console.log(parse.length);
     });
+}
+
+// voice assistant
+function voiceAssistant() {
 }
