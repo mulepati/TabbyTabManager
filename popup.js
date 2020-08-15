@@ -8,8 +8,7 @@ function displayTabs() {
         let parse = [];
         tabs.forEach(function(tab) {
             parse.push(tab);
-            console.log(tab.url + '\n');
-            console.log(tab.windowId);
+            let tabIcon = tab.url.split("/")[0].concat("/favicon.ico");
         });
         console.log(parse.length);
     });
