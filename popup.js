@@ -19,10 +19,16 @@ function displayTabs() {
             img.src = favicons[i];
             img.height = 32;
             img.width = 32;
+            img.id = i;
             img.onerror = function(){
                 img.src = "./32x32.png";
             };
+
+            let h = document.createElement("p");
+            let t = document.createTextNode(parse[i].url);
+            h.appendChild(t);
             document.body.appendChild(img);
+            document.body.appendChild(h);
         }
     });
 
