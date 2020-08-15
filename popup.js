@@ -6,11 +6,13 @@ document.getElementById("voice").addEventListener("click", voiceAssistant);
 function displayTabs() {
     chrome.tabs.query({}, function(tabs) {
         let parse = [];
+        let favicons = [];
         tabs.forEach(function(tab) {
             parse.push(tab);
-            let tabIcon = tab.url.split("/")[0].concat("/favicon.ico");
+            let parseUrl = tab.url.split("/");
+            let faviconUrl = parseUrl[0].concat("//").concat(parseUrl[2]).concat("/favicon.ico");
+            favicons.concat(faviconUrl);
         });
-        console.log(parse.length);
     });
 }
 
