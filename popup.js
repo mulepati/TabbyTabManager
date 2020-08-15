@@ -11,7 +11,7 @@ function displayTabs() {
             parse.push(tab);
             let parseUrl = tab.url.split("/");
             let faviconUrl = parseUrl[0].concat("//").concat(parseUrl[2]).concat("/favicon.ico");
-            favicons.concat(faviconUrl);
+            favicons.push(faviconUrl);
         });
     });
 }
