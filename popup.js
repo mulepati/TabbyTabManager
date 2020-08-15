@@ -3,7 +3,7 @@ document.getElementById("view").addEventListener("click", displayTabs);
 
 // display all tabs
 function displayTabs() {
-    chrome.tabs.query({}, function(tabs){
+    chrome.tabs.query({}, function(tabs) {
         let parse = [];
         tabs.forEach(function(tab) {
             parse.push(tab);
