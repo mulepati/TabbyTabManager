@@ -15,9 +15,9 @@ function displayTabs() {
         });
 
         for (let i = 0; i < favicons.length; i++) {
-            let btn = document.createElement("BUTTON");
-            btn.innerHTML = favicons[i];
-            document.body.appendChild(btn);
+            let img = document.createElement("img");
+            img.src = favicons[i];
+            document.body.appendChild(img);
         }
     });
 
