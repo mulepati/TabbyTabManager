@@ -17,6 +17,8 @@ function displayTabs() {
         for (let i = 0; i < favicons.length; i++) {
             let img = document.createElement("img");
             img.src = favicons[i];
+            img.height = 32;
+            img.width = 32;
             document.body.appendChild(img);
         }
     });
