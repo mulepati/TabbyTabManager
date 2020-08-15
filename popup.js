@@ -19,6 +19,9 @@ function displayTabs() {
             img.src = favicons[i];
             img.height = 32;
             img.width = 32;
+            img.onerror = function(){
+                img.src = "./32x32.png";
+            };
             document.body.appendChild(img);
         }
     });
@@ -28,4 +31,5 @@ function displayTabs() {
 
 // voice assistant
 function voiceAssistant() {
+
 }
