@@ -1,7 +1,25 @@
 {
-    "name" : "obj ext",
-    "description" : "my ext",
+    "name" : "Tabby the tab manager",
+    "description" : "Tab manager with voice assistant.",
     "version" : "0.1.0",
     "manifest_version" : 2,
-    ""
+    "default_locale": "en"
+    "icons" : {
+        "16" :,
+        "32" :,
+        "48" :,
+        "128" :
+    },
+    "background" : {
+        "scripts" : ["./background.js"]
+    },
+
+    "options-page" : "./ontions.html",
+    "browser_action" : {
+        "default_popup" : "popup.html"
+    },
+    "permissions" : [
+        "tabs",
+        "https://www.google.com/*"
+    ]
 }
