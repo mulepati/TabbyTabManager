@@ -50,7 +50,7 @@ function displayTabs() {
             // If you click the window title, will focus/open the given window
             windowTitle.onclick = function() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
-            }
+            };
             windowTitle.innerHTML = "Window " + windowCount;
             newDiv.appendChild(windowTitle);
 
@@ -68,6 +68,7 @@ function displayTabs() {
                 img.height = 32;
                 img.width = 32;
                 img.onclick = function(){
+                    chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
                 img.onerror = function(){
@@ -78,6 +79,7 @@ function displayTabs() {
                 let title = document.createElement("p");
                 title.innerHTML = tab.title;
                 title.onclick = function(){
+                    chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
 
