@@ -36,10 +36,6 @@ header {
     margin-top: 30px;
 }
 
-header:hover {
-    background: lavender;
-}
-
 p {
     color: darkslategray;
     font-family: "Courier New";
