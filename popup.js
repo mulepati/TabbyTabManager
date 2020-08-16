@@ -63,6 +63,8 @@ function displayTabs() {
             let deleteWindow = document.createElement("p");
             deleteWindow.innerHTML = "delete window";
             deleteWindow.style.float = "left";
+            deleteWindow.style.color = "red";
+            deleteWindow.style.fontSize = "10px";
             deleteWindow.onclick = function(){
                 chrome.windows.remove(windowID);
                 let windowDiv = document.getElementById(windowID);
@@ -95,7 +97,8 @@ function displayTabs() {
                 img.height = 32;
                 img.width = 32;
                 img.style.float = "left";
-                img.style.marginLeft = "20px";
+                img.style.marginLeft = "15px";
+                img.style.marginRight = "20px";
                 img.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
@@ -138,19 +141,14 @@ function displayTabs() {
                 // TAB TITLES!
                 let title = document.createElement("p");
                 title.innerHTML = tab.title;
-                title.style.float = "left";
                 title.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
 
-                // Break div
-                let br = document.createElement("br");
-
                 // Append new elements
                 drag.appendChild(img);
                 drag.appendChild(deleteTab);
-                drag.appendChild(br);
                 drag.appendChild(title);
                 drag.setAttribute("draggable", "true");
 
