@@ -46,11 +46,6 @@ p {
     font-size: 14px;
 }
 
-p:hover {
-    font-weight: bold;
-    background: lightcyan;
-}
-
 div {
     border-color: lightcyan;
 }
@@ -62,6 +57,11 @@ div {
     border-bottom: 2px solid #666;
     border-radius: .5em;
     cursor: move;
+}
+
+.box:hover {
+    font-weight: bold;
+    background: lightcyan;
 }
 
 .box.over {
