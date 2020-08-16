@@ -56,7 +56,9 @@ div {
 }
 
 .box {
-    background-color: #85d3eb;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    background-color: lavender;
     border-bottom: 2px solid #666;
     border-radius: .5em;
     cursor: move;
@@ -69,7 +71,6 @@ div {
 .dropzones {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    background-color: #b6e2f0;
 }
 
 [draggable] {
