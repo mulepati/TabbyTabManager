@@ -64,6 +64,7 @@ function displayTabs() {
             deleteWindow.innerHTML = "delete window";
             deleteWindow.style.float = "left";
             deleteWindow.style.color = "red";
+            deleteWindow.style.marginBottom = "15px";
             deleteWindow.style.fontSize = "10px";
             deleteWindow.onclick = function(){
                 chrome.windows.remove(windowID);
