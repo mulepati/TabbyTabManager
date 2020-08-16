@@ -5,8 +5,9 @@ html {
 
 button {
     font-family: "Courier New";
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 10px;
+    margin-bottom: 5px;
     border-color: lavender;
     border-radius: 0px;
     padding: 8px 8px;
@@ -32,13 +33,22 @@ header {
     font-family: "Courier New";
     font-weight: bolder;
     font-size: 28px;
-    margin-top: 40px;
+    margin-top: 30px;
+}
+
+header:hover {
+    background: lavender;
 }
 
 p {
     color: darkslategray;
     font-family: "Courier New";
     font-size: 14px;
+}
+
+p:hover {
+    font-weight: bold;
+    background: lightcyan;
 }
 
 div {
