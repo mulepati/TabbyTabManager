@@ -36,7 +36,7 @@ function displayTabs() {
             tabInfo.get(windowID).push(tab);
         });
 
-        // NEW DIV TAG
+        // NEW DIV TAG FOR ALL WINDOWS/TABS
         let newDiv = document.createElement("div");
         newDiv.id = "div";
 
@@ -44,13 +44,13 @@ function displayTabs() {
         let windowCount = 1;
         let currentWindow = windows.next();
         while (!currentWindow.done) {
+            let windowID = currentWindow.value;
 
             // New div class for each window, acts as dropzones
             let dropzone = document.createElement("div");
-            dropzone.id = "div " + windowCount;
+            dropzone.id = windowID;
             dropzone.className = "dropzones";
 
-            let windowID = currentWindow.value;
             // WINDOW TITLE!
             let windowTitle = document.createElement("header");
             // If you click the window title, will focus/open the given window
@@ -62,8 +62,11 @@ function displayTabs() {
             // Delete entire window
             let deleteWindow = document.createElement("p");
             deleteWindow.innerHTML = "delete window";
+            deleteWindow.style.float = "left";
             deleteWindow.onclick = function(){
                 chrome.windows.remove(windowID);
+                let windowDiv = document.getElementById(windowID);
+                windowDiv.parentNode.removeChild(windowDiv);
             };
 
             // Append to div
@@ -75,12 +78,13 @@ function displayTabs() {
             // For each tab under the current window, display favicon and title
             let tabs = tabInfo.get(windowID);
             for (let i = 0; i < tabs.length; i ++) {
+                let tab = tabs[i];
+                let tabID = tab.id;
+
                 // New div class for each tab, acts as draggable elements
                 let drag = document.createElement("div");
                 drag.className = "box";
-                
-                let tab = tabs[i];
-                drag.id = "" + tab;
+                drag.id = tabID;
                 let url = tab.url;
 
                 // FAVICON ICONS!
@@ -90,6 +94,8 @@ function displayTabs() {
                 img.src = faviconUrl;
                 img.height = 32;
                 img.width = 32;
+                img.style.float = "left";
+                img.style.marginLeft = "20px";
                 img.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
@@ -98,24 +104,53 @@ function displayTabs() {
                     img.src = "./32x32.png";
                 };
 
+                // Delete specific tab
+                let deleteTab = document.createElement("img");
+                deleteTab.src = "./delete.png";
+                deleteTab.style.float = "right";
+                deleteTab.height = 16;
+                deleteTab.width = 16;
+                deleteTab.style.marginRight = "20px";
+                deleteTab.onclick = function(){
+                    // If this is the last tab in the window, delete the whole window. Otherwise, just delete the tab.
+                    // let currentTabCount = 0;
+                    // let tabToDelete = chrome.tabs.get(tabID, function(tab){});
+                    // let tabWindowID = tabToDelete.windowId;
+                    // chrome.tabs.query({windowId: tabWindowID}, function(tabs) {
+                    //     tabs.forEach(function(tab) {
+                    //         currentTabCount++;
+                    //     });
+                    // });
+                    // if (currentTabCount === 0) {
+                    //     // Remove window listing from popup
+                    //     let windowDiv = document.getElementById(windowID);
+                    //     windowDiv.parentNode.removeChild(windowDiv);
+                    // } else {
+                    //     // Remove tab listing from popup
+                    //     let tabDiv = document.getElementById("" + tabID);
+                    //     tabDiv.parentNode.removeChild(tabDiv);
+                    // }
+                    let tabDiv = document.getElementById("" + tabID);
+                    tabDiv.parentNode.removeChild(tabDiv);
+                    chrome.tabs.remove(tabID);
+                };
+
                 // TAB TITLES!
                 let title = document.createElement("p");
                 title.innerHTML = tab.title;
+                title.style.float = "left";
                 title.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
 
-                // Delete specific tab
-                let deleteTab = document.createElement("p");
-                deleteTab.innerHTML = "delete tab";
-                deleteTab.onclick = function(){
-                    chrome.tabs.remove(tab.id);
-                };
+                // Break div
+                let br = document.createElement("br");
 
                 // Append new elements
                 drag.appendChild(img);
                 drag.appendChild(deleteTab);
+                drag.appendChild(br);
                 drag.appendChild(title);
                 drag.setAttribute("draggable", "true");
 

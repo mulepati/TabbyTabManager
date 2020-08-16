@@ -55,16 +55,18 @@ div {
     border-color: lightcyan;
 }
 
+.remove
+
 .box {
     background-color: #85d3eb;
-    border: 2px solid #666;
+    border-bottom: 2px solid #666;
     border-radius: .5em;
     cursor: move;
 }
 
 .box.over {
     border: 2px dotted #666;
-  }
+}
 
 .dropzones {
     display: grid;
