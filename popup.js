@@ -53,6 +53,7 @@ function displayTabs() {
             let windowID = currentWindow.value;
             // WINDOW TITLE!
             let windowTitle = document.createElement("header");
+            windowTitle.document
             // If you click the window title, will focus/open the given window
             windowTitle.onclick = function() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
@@ -110,10 +111,73 @@ function displayTabs() {
             currentWindow = windows.next();
             windowCount++;
         }
-
+        console.log("done");
+        makeTabsDraggable();
     });
+}
 
+function makeTabsDraggable() {
+    let dragSrcEl = null;
 
+    function handleDragStart(e) {
+        console.log("Drag started!");
+        dragSrcEl = this;
+        console.log(this);
+        this.style.opacity = '0.4';
+
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+    }
+
+    function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+
+        e.dataTransfer.dropEffect = 'move';
+
+        return false;
+    }
+
+    function handleDragEnter(e) {
+        this.classList.add('over');
+    }
+
+    function handleDragLeave(e) {
+        this.classList.remove('over');
+    }
+
+    function handleDrop(e) {
+        e.stopPropagation();
+        console.log(this);
+
+        if (dragSrcEl !== this) {
+            dragSrcEl.innerHTML = this.innerHTML;
+            this.innerHTML = e.dataTransfer.getData('text/html');
+            event.preventDefault();
+        }
+
+        return false;
+    }
+
+    function handleDragEnd(e) {
+        this.style.opacity = '1';
+
+        items.forEach(function (item) {
+            item.classList.remove('over');
+        });
+    }
+
+    let items = document.querySelectorAll('.box');
+    console.log(items);
+    items.forEach(function(item) {
+        item.addEventListener('dragstart', handleDragStart, false);
+        item.addEventListener('dragenter', handleDragEnter, false);
+        item.addEventListener('dragover', handleDragOver, false);
+        item.addEventListener('dragleave', handleDragLeave, false);
+        item.addEventListener('drop', handleDrop, false);
+        item.addEventListener('dragend', handleDragEnd, false);
+    });
 }
 
 // voice assistant
