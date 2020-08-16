@@ -6,9 +6,11 @@ function toggleTabs() {
     if (btn.innerHTML === "View all tabs") {
         displayTabs();
         btn.innerHTML = "Hide all tabs";
+        document.getElementById("message").innerHTML = "Click again to hide your tabs!";
     } else {
         hideTabs();
         btn.innerHTML = "View all tabs";
+        document.getElementById("message").innerHTML = "Click below to see your tabs!";
     }
 }
 
