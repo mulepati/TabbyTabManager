@@ -50,7 +50,7 @@ function displayTabs() {
             // If you click the window title, will focus/open the given window
             windowTitle.onclick = function() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
-            }
+            };
             windowTitle.innerHTML = "Window " + windowCount;
             newDiv.appendChild(windowTitle);
 
