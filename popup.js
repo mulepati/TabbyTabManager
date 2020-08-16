@@ -1,5 +1,5 @@
 document.getElementById("toggle").addEventListener("click", toggleTabs);
-document.getElementById("voice").addEventListener("click", voiceAssistant);
+//document.getElementById("voice").addEventListener("click", voiceAssistant);
 
 function toggleTabs() {
     let btn = document.getElementById("toggle");
@@ -239,41 +239,41 @@ function makeTabsDraggable() {
 }
 
 // voice assistant
-function voiceAssistant() {
-    let message = document.querySelector('#message');
-
-    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
-
-    let grammar = '#JSGF V1.0;';
-
-    let recognition = new SpeechRecognition();
-    let speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-
-    recognition.onresult = function(event) {
-        let last = event.results.length - 1;
-        let command = event.results[last][0].transcript;
-        message.textContent = 'Voice Input: ' + command + '.';
-        console.log("close window command");
-        if (command.toLowerCase() === 'close window') {
-            console.log("close window command");
-        }
-    }
-
-    recognition.onspeechend = function() {
-        recognition.stop();
-    };
-
-    recognition.onnomatch = function(event) {
-        diagnostic.textContent = 'Sorry, I didn\'t quite catch that';
-    }
-
-    recognition.onerror = function(event) {
-        message.textContent = 'Error occurred in recognition: ' + event.error;
-    }
-}
+// function voiceAssistant() {
+//     let message = document.querySelector('#message');
+//
+//     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+//     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+//     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+//
+//     let grammar = '#JSGF V1.0;';
+//
+//     let recognition = new SpeechRecognition();
+//     let speechRecognitionList = new SpeechGrammarList();
+//     speechRecognitionList.addFromString(grammar, 1);
+//     recognition.grammars = speechRecognitionList;
+//     recognition.lang = 'en-US';
+//     recognition.interimResults = false;
+//
+//     recognition.onresult = function(event) {
+//         let last = event.results.length - 1;
+//         let command = event.results[last][0].transcript;
+//         message.textContent = 'Voice Input: ' + command + '.';
+//         console.log("close window command");
+//         if (command.toLowerCase() === 'close window') {
+//             console.log("close window command");
+//         }
+//     }
+//
+//     recognition.onspeechend = function() {
+//         recognition.stop();
+//     };
+//
+//     recognition.onnomatch = function(event) {
+//         diagnostic.textContent = 'Sorry, I didn\'t quite catch that';
+//     }
+//
+//     recognition.onerror = function(event) {
+//         message.textContent = 'Error occurred in recognition: ' + event.error;
+//     }
+// }
