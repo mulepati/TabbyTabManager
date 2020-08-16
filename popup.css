@@ -1,0 +1,77 @@
+html {
+    height: 100px;
+    width: 300px;
+}
+
+button {
+    font-family: "Courier New";
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-color: lavender;
+    border-radius: 0px;
+    padding: 8px 8px;
+    background-color: lavender;
+    font-size: 14px;
+    box-shadow: 0 4px lightgray;
+    outline: none;
+}
+
+button:hover {
+    background-color: lightcyan;
+    border-color: lightsteelblue;
+    box-shadow: 0 4px lightsteelblue;
+}
+
+button:active {
+    box-shadow: 0 2px lightsteelblue;
+    transform: translateY(2px);
+}
+
+header {
+    color: darkslategray;
+    font-family: "Courier New";
+    font-weight: bolder;
+    font-size: 28px;
+    margin-top: 30px;
+}
+
+header:hover {
+    background: lavender;
+}
+
+p {
+    color: darkslategray;
+    font-family: "Courier New";
+    font-size: 14px;
+}
+
+p:hover {
+    font-weight: bold;
+    background: lightcyan;
+}
+
+div {
+    border-color: lightcyan;
+}
+
+.box {
+    background-color: #85d3eb;
+    border: 2px solid #666;
+    border-radius: .5em;
+    cursor: move;
+}
+
+.box.over {
+    border: 2px dotted #666;
+  }
+
+.dropzones {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    background-color: #b6e2f0;
+}
+
+[draggable] {
+    user-select: none;
+}
