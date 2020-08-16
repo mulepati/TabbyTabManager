@@ -45,6 +45,8 @@ function displayTabs() {
         let currentWindow = windows.next();
         while (!currentWindow.done) {
             let windowID = currentWindow.value;
+            let tabs = tabInfo.get(windowID);
+            let numTabs = tabs.length;
 
             // New div class for each window, acts as dropzones
             let dropzone = document.createElement("div");
@@ -53,12 +55,17 @@ function displayTabs() {
 
             // WINDOW TITLE!
             let windowTitle = document.createElement("header");
-            windowTitle.document
             // If you click the window title, will focus/open the given window
             windowTitle.onclick = function() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
             };
             windowTitle.innerHTML = "Window " + windowCount;
+
+            let tabCount = document.createElement("p");
+            tabCount.style.fontWeight = "normal";
+            tabCount.style.fontSize = "14px";
+            tabCount.style.background = "white";
+            tabCount.innerHTML = numTabs + " tab(s)";
 
             // Delete entire window
             let deleteWindow = document.createElement("p");
@@ -76,11 +83,11 @@ function displayTabs() {
             // Append to div
             dropzone.appendChild(windowTitle);
             dropzone.appendChild(deleteWindow);
+            //dropzone.appendChild(tabCount);
             dropzone.setAttribute("ondragover", "onDragOver(event);");
             dropzone.setAttribute("ondrop", "onDrop(event);");
 
             // For each tab under the current window, display favicon and title
-            let tabs = tabInfo.get(windowID);
             for (let i = 0; i < tabs.length; i ++) {
                 let tab = tabs[i];
                 let tabID = tab.id;
@@ -133,8 +140,9 @@ function displayTabs() {
                         }
                         // Remove the actual tab
                         chrome.tabs.remove(tabID);
-                    });
+                        numTabs--;
 
+                    });
                 };
 
                 // TAB TITLES!
