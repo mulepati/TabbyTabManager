@@ -1,6 +1,6 @@
 {
     "name" : "Tabby the tab manager",
-    "description" : "Tab manager with voice assistant.",
+    "description" : "Tab and window manager.",
     "version" : "0.1.0",
     "manifest_version" : 2,
     "icons" : {
