@@ -47,6 +47,9 @@ function displayTabs() {
             let windowID = currentWindow.value;
             // WINDOW TITLE!
             let windowTitle = document.createElement("header");
+            windowTitle.onclick = function() {
+                chrome.windows.update(windowID, {focused : true}, function(tab){});
+            }
             windowTitle.innerHTML = "Window " + windowCount;
             newDiv.appendChild(windowTitle);
 
