@@ -15,6 +15,7 @@ button {
     font-size: 14px;
     box-shadow: 0 4px lightgray;
     outline: none;
+    border-radius: .5em;
 }
 
 button:hover {
@@ -54,13 +55,14 @@ div {
     padding-top: 15px;
     padding-bottom: 10px;
     background-color: lavender;
-    border-bottom: 2px solid #666;
+    border-bottom: 2px solid gray;
     border-radius: .5em;
 }
 
 .box:hover {
     font-weight: bold;
     background: lightcyan;
+    border-bottom: 2px solid lightsteelblue;
 }
 
 .box.over {

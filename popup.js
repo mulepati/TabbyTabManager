@@ -116,6 +116,7 @@ function displayTabs() {
                 deleteTab.height = 16;
                 deleteTab.width = 16;
                 deleteTab.style.marginRight = "20px";
+                deleteTab.style.marginLeft = "10px";
                 deleteTab.onclick = function(){
                     // If this is the last tab in the window, delete the whole window. Otherwise, just delete the tab.
                     // let currentTabCount = 0;
