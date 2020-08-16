@@ -63,8 +63,10 @@ function displayTabs() {
 
             let tabCount = document.createElement("p");
             tabCount.style.fontWeight = "normal";
-            tabCount.style.fontSize = "14px";
+            tabCount.style.fontSize = "12px";
             tabCount.style.background = "white";
+            tabCount.style.marginTop = "5px";
+            tabCount.style.marginBottom = "5px";
             tabCount.innerHTML = numTabs + " tab(s)";
 
             // Delete entire window
@@ -72,7 +74,8 @@ function displayTabs() {
             deleteWindow.innerHTML = "delete window";
             deleteWindow.style.float = "left";
             deleteWindow.style.color = "red";
-            deleteWindow.style.marginBottom = "15px";
+            deleteWindow.style.marginBottom = "10px";
+            deleteWindow.style.marginTop = "10px";
             deleteWindow.style.fontSize = "10px";
             deleteWindow.onclick = function(){
                 chrome.windows.remove(windowID);
@@ -82,8 +85,8 @@ function displayTabs() {
 
             // Append to div
             dropzone.appendChild(windowTitle);
+            dropzone.appendChild(tabCount);
             dropzone.appendChild(deleteWindow);
-            //dropzone.appendChild(tabCount);
             dropzone.setAttribute("ondragover", "onDragOver(event);");
             dropzone.setAttribute("ondrop", "onDrop(event);");
 
@@ -141,7 +144,7 @@ function displayTabs() {
                         // Remove the actual tab
                         chrome.tabs.remove(tabID);
                         numTabs--;
-
+                        tabCount.innerHTML = numTabs + " tab(s)";
                     });
                 };
 
