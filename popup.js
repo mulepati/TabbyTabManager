@@ -25,7 +25,7 @@ function displayTabs() {
             };
 
             let h = document.createElement("p");
-            let t = document.createTextNode(parse[i].url);
+            let t = document.createTextNode(parse[i].title);
             h.appendChild(t);
             document.body.appendChild(img);
             document.body.appendChild(h);
