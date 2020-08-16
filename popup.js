@@ -1,6 +1,21 @@
-// click event listener for "view all tabs" button on popup
-document.getElementById("view").addEventListener("click", displayTabs);
+document.getElementById("toggle").addEventListener("click", toggleTabs);
 document.getElementById("voice").addEventListener("click", voiceAssistant);
+
+function toggleTabs() {
+    let btn = document.getElementById("toggle");
+    if (btn.innerHTML === "View all tabs") {
+        displayTabs();
+        btn.innerHTML = "Hide all tabs";
+    } else {
+        hideTabs();
+        btn.innerHTML = "View all tabs";
+    }
+}
+
+function hideTabs() {
+    let div = document.getElementById("div");
+    div.parentNode.removeChild(div);
+}
 
 // Display icons and titles of all tabs in all chrome windows
 function displayTabs() {
@@ -22,16 +37,19 @@ function displayTabs() {
 
         });
 
+        // NEW DIV TAG
+        let newDiv = document.createElement("div");
+        newDiv.id = "div";
+
         let windows = tabInfo.keys();
         let windowCount = 1;
-
         let currentWindow = windows.next();
         while (!currentWindow.done) {
             let windowID = currentWindow.value;
             // WINDOW TITLE!
-            let windowTitle = document.createElement("input");
-            windowTitle.placeholder = "Window " + windowCount;
-            document.body.appendChild(windowTitle);
+            let windowTitle = document.createElement("header");
+            windowTitle.innerHTML = "Window " + windowCount;
+            newDiv.appendChild(windowTitle);
 
             // For each tab under the current window, display favicon and title
             let tabs = tabInfo.get(windowID);
@@ -46,10 +64,8 @@ function displayTabs() {
                 img.src = faviconUrl;
                 img.height = 32;
                 img.width = 32;
-                let tabID = "id";
-                img.id = tabID;
                 img.onclick = function(){
-                    chrome.tabs.highlight({windowId: windowID, tabs: i})
+                    chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
                 img.onerror = function(){
                     img.src = "./32x32.png";
@@ -57,16 +73,16 @@ function displayTabs() {
 
                 // TAB TITLES!
                 let title = document.createElement("p");
-                title.id = url;
                 title.innerHTML = tab.title;
                 title.onclick = function(){
-                    chrome.tabs.highlight({windowId: windowID, tabs: i})
+                    chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
 
                 // Append new elements
-                document.body.appendChild(img);
-                document.body.appendChild(title);
+                newDiv.appendChild(img);
+                newDiv.appendChild(title);
             }
+            document.body.append(newDiv);
             // Update current window
             currentWindow = windows.next();
             windowCount++;
@@ -76,11 +92,6 @@ function displayTabs() {
 
 
 }
-
-// go to tab
-// function goToTab(windowID, tabIndex) {
-//     chrome.tabs.highlight({windowId: windowID, tabs: tabIndex})
-// }
 
 // voice assistant
 function voiceAssistant() {
