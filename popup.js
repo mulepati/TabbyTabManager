@@ -117,33 +117,31 @@ function displayTabs() {
                 deleteTab.width = 16;
                 deleteTab.style.marginRight = "20px";
                 deleteTab.style.marginLeft = "10px";
-                deleteTab.onclick = function(){
-                    // If this is the last tab in the window, delete the whole window. Otherwise, just delete the tab.
-                    // let currentTabCount = 0;
-                    // let tabToDelete = chrome.tabs.get(tabID, function(tab){});
-                    // let tabWindowID = tabToDelete.windowId;
-                    // chrome.tabs.query({windowId: tabWindowID}, function(tabs) {
-                    //     tabs.forEach(function(tab) {
-                    //         currentTabCount++;
-                    //     });
-                    // });
-                    // if (currentTabCount === 0) {
-                    //     // Remove window listing from popup
-                    //     let windowDiv = document.getElementById(windowID);
-                    //     windowDiv.parentNode.removeChild(windowDiv);
-                    // } else {
-                    //     // Remove tab listing from popup
-                    //     let tabDiv = document.getElementById("" + tabID);
-                    //     tabDiv.parentNode.removeChild(tabDiv);
-                    // }
-                    let tabDiv = document.getElementById("" + tabID);
-                    tabDiv.parentNode.removeChild(tabDiv);
-                    chrome.tabs.remove(tabID);
+                deleteTab.onclick = async function () {
+                    // Check how many tabs are in that window
+                    await chrome.tabs.query({windowId: windowID}, function (tabs) {
+                        chrome.extension.getBackgroundPage().console.log(tabs);
+
+                        // If there is more than one tab in the window, remove the tab from the popup.
+                        // If there is only one, remove the entire window from the popup.
+                        if (tabs.length > 1) {
+                            // Remove tab listing from popup
+                            let tabDiv = document.getElementById("" + tabID);
+                            tabDiv.parentNode.removeChild(tabDiv);
+                        } else {
+                            // Remove window listing from popup
+                            let windowDiv = document.getElementById(windowID);
+                            windowDiv.parentNode.removeChild(windowDiv);
+                        }
+                        // Remove the actual tab
+                        chrome.tabs.remove(tabID);
+                    });
+
                 };
 
                 // TAB TITLES!
                 let title = document.createElement("p");
-                title.innerHTML = tab.title;
+                title.innerHTML = tab.title + " " + windowID;
                 title.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});

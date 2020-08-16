@@ -47,6 +47,10 @@ p {
     font-size: 14px;
 }
 
+p:hover {
+    font-weight: bold;
+}
+
 div {
     border-color: lightcyan;
 }
