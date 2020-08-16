@@ -19,7 +19,6 @@
     },
     "permissions" : [
         "tabs",
-        "audioCapture"
         "https://www.google.com/*"
     ]
 }
