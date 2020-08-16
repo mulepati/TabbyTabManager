@@ -236,8 +236,9 @@ function makeTabsDraggable() {
 function voiceAssistant() {
     let message = document.querySelector('#message');
 
-    let SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    let SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
     let grammar = '#JSGF V1.0;';
 
@@ -261,6 +262,10 @@ function voiceAssistant() {
     recognition.onspeechend = function() {
         recognition.stop();
     };
+
+    recognition.onnomatch = function(event) {
+        diagnostic.textContent = 'Sorry, I didn\'t quite catch that';
+    }
 
     recognition.onerror = function(event) {
         message.textContent = 'Error occurred in recognition: ' + event.error;
