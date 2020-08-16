@@ -120,8 +120,6 @@ function displayTabs() {
                 deleteTab.onclick = async function () {
                     // Check how many tabs are in that window
                     await chrome.tabs.query({windowId: windowID}, function (tabs) {
-                        chrome.extension.getBackgroundPage().console.log(tabs);
-
                         // If there is more than one tab in the window, remove the tab from the popup.
                         // If there is only one, remove the entire window from the popup.
                         if (tabs.length > 1) {
@@ -141,7 +139,7 @@ function displayTabs() {
 
                 // TAB TITLES!
                 let title = document.createElement("p");
-                title.innerHTML = tab.title + " " + windowID;
+                title.innerHTML = tab.title + " ";
                 title.onclick = function(){
                     chrome.windows.update(windowID, {focused : true}, function(tab){});
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
