@@ -44,6 +44,12 @@ function displayTabs() {
         let windowCount = 1;
         let currentWindow = windows.next();
         while (!currentWindow.done) {
+
+            // New div class for each window, acts as dropzones
+            let dropzone = document.createElement("div");
+            dropzone.id = "div " + windowCount;
+            dropzone.className = "dropzones";
+
             let windowID = currentWindow.value;
             // WINDOW TITLE!
             let windowTitle = document.createElement("header");
@@ -52,12 +58,17 @@ function displayTabs() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
             };
             windowTitle.innerHTML = "Window " + windowCount;
-            newDiv.appendChild(windowTitle);
+            dropzone.appendChild(windowTitle);
 
             // For each tab under the current window, display favicon and title
             let tabs = tabInfo.get(windowID);
             for (let i = 0; i < tabs.length; i ++) {
+                // New div class for each tab, acts as draggable elements
+                let drag = document.createElement("div");
+                drag.className = "draggable";
+                
                 let tab = tabs[i];
+                drag.id = "" + tab;
                 let url = tab.url;
 
                 // FAVICON ICONS!
@@ -84,9 +95,13 @@ function displayTabs() {
                 };
 
                 // Append new elements
-                newDiv.appendChild(img);
-                newDiv.appendChild(title);
+                drag.appendChild(img);
+                drag.appendChild(title);
+
+                dropzone.appendChild(drag);
             }
+
+            newDiv.appendChild(dropzone);
             document.body.append(newDiv);
             // Update current window
             currentWindow = windows.next();

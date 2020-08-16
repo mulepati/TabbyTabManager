@@ -54,3 +54,11 @@ p:hover {
 div {
     border-color: lightcyan;
 }
+
+.draggable {
+    background-color: #85d3eb;
+}
+
+.dropzones {
+    background-color: #b6e2f0;
+}
