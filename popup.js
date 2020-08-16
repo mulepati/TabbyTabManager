@@ -59,13 +59,15 @@ function displayTabs() {
             };
             windowTitle.innerHTML = "Window " + windowCount;
             dropzone.appendChild(windowTitle);
+            dropzone.setAttribute("ondragover", "onDragOver(event);");
+            dropzone.setAttribute("ondrop", "onDrop(event);");
 
             // For each tab under the current window, display favicon and title
             let tabs = tabInfo.get(windowID);
             for (let i = 0; i < tabs.length; i ++) {
                 // New div class for each tab, acts as draggable elements
                 let drag = document.createElement("div");
-                drag.className = "draggable";
+                drag.className = "box";
                 
                 let tab = tabs[i];
                 drag.id = "" + tab;
@@ -97,6 +99,7 @@ function displayTabs() {
                 // Append new elements
                 drag.appendChild(img);
                 drag.appendChild(title);
+                drag.setAttribute("draggable", "true");
 
                 dropzone.appendChild(drag);
             }
