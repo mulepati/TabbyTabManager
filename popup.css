@@ -36,6 +36,15 @@ header {
     margin-top: 30px;
 }
 
+header:hover {
+    color: rgb(45, 70, 70);
+    background: lightcyan;
+    font-family: "Courier New";
+    font-weight: bolder;
+    font-size: 28px;
+    margin-top: 30px;
+}
+
 p {
     color: darkslategray;
     font-family: "Courier New";
