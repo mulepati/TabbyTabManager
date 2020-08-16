@@ -58,7 +58,17 @@ function displayTabs() {
                 chrome.windows.update(windowID, {focused : true}, function(tab){});
             };
             windowTitle.innerHTML = "Window " + windowCount;
+
+            // Delete entire window
+            let deleteWindow = document.createElement("p");
+            deleteWindow.innerHTML = "delete window";
+            deleteWindow.onclick = function(){
+                chrome.windows.remove(windowID);
+            };
+
+            // Append to div
             dropzone.appendChild(windowTitle);
+            dropzone.appendChild(deleteWindow);
             dropzone.setAttribute("ondragover", "onDragOver(event);");
             dropzone.setAttribute("ondrop", "onDrop(event);");
 
@@ -96,8 +106,16 @@ function displayTabs() {
                     chrome.tabs.highlight({windowId: windowID, tabs: i});
                 };
 
+                // Delete specific tab
+                let deleteTab = document.createElement("p");
+                deleteTab.innerHTML = "delete tab";
+                deleteTab.onclick = function(){
+                    chrome.tabs.remove(tab.id);
+                };
+
                 // Append new elements
                 drag.appendChild(img);
+                drag.appendChild(deleteTab);
                 drag.appendChild(title);
                 drag.setAttribute("draggable", "true");
 
