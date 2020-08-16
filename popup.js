@@ -164,7 +164,6 @@ function displayTabs() {
             currentWindow = windows.next();
             windowCount++;
         }
-        console.log("done");
         makeTabsDraggable();
     });
 }
@@ -173,9 +172,8 @@ function makeTabsDraggable() {
     let dragSrcEl = null;
 
     function handleDragStart(e) {
-        console.log("Drag started!");
         dragSrcEl = this;
-        console.log(this);
+
         this.style.opacity = '0.4';
 
         e.dataTransfer.effectAllowed = 'move';
