@@ -1,0 +1,1 @@
+var promise = navigator.mediaDevices.getUserMedia({audio: true});
